@@ -1,0 +1,124 @@
+/**
+\mainpage AnimShader Lib
+
+Hello everyone and welcome to the AnimShader lib documentation.
+This lib was born because I needed a quick way to managing, saving ,loading and assign shaders
+to an animation rig without going crazy with it.
+
+The library is composed of several different parts and here I am going over them to give you and idea
+about the structure of the lib.
+
+*components
+*         -# Shaders
+*         -# Attributes
+*         -# Matchers
+*         -# Look
+
+
+First of all we have shaders classes.
+Every shader class needs to inherit from the abstract class Shader.
+Doing so all the needed behaviors will be inherited.
+We can manipulate the attribute  on the shaders by directly manipulating 
+the class attributes \n
+\b Example:
+\code
+from shaders import shader_lambert
+from shaders import shader_blinn
+#declare a shader
+lamb = shader_lambert.Lambert("test")
+lamb.translucenceDepth = 0
+lamb.name
+bl = shader_blinn.Blinn()
+lamb.color = [1,0,0]
+lamb.color = "C:/Users/Marco/Desktop/perlinNoise.png"
+\endcode
+
+The sync between the python class and the shaders works both ways and it s implemented
+using the such called attributes.
+All attributes are sublcassed from the abstract class Attribure which implements the basic functionalities.
+If a data type is not supported yet it is possible to subclass it and implement the wanted behavior.
+Once you have the attribute you need you just need to add it as "static" atribute on the class and
+you are all set.
+For more information I suggest you to have a look to the attribute source.
+
+Next step are the matchers.
+The matchers are classes that lets you dynamically find the geometries in the scene which respect
+specific rules.
+Each matchrs rapresent a rule
+
+\b Example:
+\code
+#declare a matcher
+from matcher import shader_set_matcher
+from matcher import shader_wild_card_matcher
+
+m1 = shader_set_matcher.Set_matcher("cubes")
+m2 = shader_wild_card_matcher.Wild_card_matcher("*Cube?")
+m2.get_meshes()
+\endcode
+
+
+The final component is the Look class.
+The Look class is a manager for both matchers and shaders.
+Each combinations of rules and shaders is called sub_look.
+You can add a sublook to the Look class and then apply the look
+which will find the geom and apply the correct shader.
+
+
+
+\b Example:
+\code
+#declare a look
+from shader_look import look
+l = look.Look()
+l.add_sublook([m1,m2],lamb)
+l.apply_look()
+\endcode
+
+You can chain multiple rules together in order to refine your search.
+
+Of course all those classes knows how to save and load each other.
+This means that by calling the save() and load() method of the look
+class you will be able to completely save and re-load an entire look
+with all its shaders and matchers
+
+\b Full example
+\code
+from shaders import shader_lambert
+from shaders import shader_blinn
+#declare a shader
+lamb = shader_lambert.Lambert("test")
+lamb.translucenceDepth = 0
+bl = shader_blinn.Blinn()
+lamb.color = [1,0,0]
+lamb.color = "C:/Users/Marco/Desktop/perlinNoise.png"
+lamb.color = "C:/Users/Marco/Desktop/checker.jpg"
+
+lamb.transparency = [0.5,0.5,0.5]
+lamb.save()
+lamb.translucenceDepth = 2
+lamb.name = "LOL"
+
+#declare a matcher
+from matcher import shader_set_matcher
+from matcher import shader_wild_card_matcher
+
+m1 = shader_set_matcher.Set_matcher("cubes")
+m2 = shader_wild_card_matcher.Wild_card_matcher("*Cube?")
+m2.get_meshes()
+
+#declare a look
+from shader_look import look
+l = look.Look()
+l.add_sublook([m1,m2],lamb)
+l.apply_look()
+
+
+\endcode
+
+for comments, critiques, questions or anything feel free to contact me at:
+marco(dot)giordano(dot)work(at)gmail(dot)com
+
+PS: Special thanks to my Python mentor Leandro Pedroni which is a freaking wiz!
+
+*/
