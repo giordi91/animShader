@@ -1,8 +1,8 @@
-from matcher import shader_matcher
-from matcher import shader_set_matcher
-from matcher import shader_wild_card_matcher
+from animShader.matcher import matcher
+from animShader.matcher import set_matcher
+from animShader.matcher import wild_card_matcher
 
-modules = [shader_matcher, shader_set_matcher, shader_wild_card_matcher]
+modules = [matcher, set_matcher, wild_card_matcher]
 
 
 

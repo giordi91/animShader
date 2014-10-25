@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['reflectedcolor',['reflectedColor',['../classanimshader_1_1shaders_1_1shader__blinn_1_1_blinn.html#af7c63ed27ec336915f1b705a33cca9c3',1,'animshader::shaders::shader_blinn::Blinn']]],
-  ['reflectivity',['reflectivity',['../classanimshader_1_1shaders_1_1shader__blinn_1_1_blinn.html#a3d672b1124d73e3cb141bb8d8fbbc938',1,'animshader::shaders::shader_blinn::Blinn']]],
-  ['rgb_5fattr',['Rgb_attr',['../classanimshader_1_1attributes_1_1shader__rgb__attr_1_1_rgb__attr.html',1,'animshader::attributes::shader_rgb_attr']]]
+  ['penumbraangle',['penumbraAngle',['../classpython_1_1animshader_1_1light__setup_1_1lights_1_1spot__light_1_1_spot_light.html#acdb9f604a940fe90fdc57e1a96a98a87',1,'python::animshader::light_setup::lights::spot_light::SpotLight']]],
+  ['pointlight',['PointLight',['../classpython_1_1animshader_1_1light__setup_1_1lights_1_1point__light_1_1_point_light.html',1,'python::animshader::light_setup::lights::point_light']]]
 ];

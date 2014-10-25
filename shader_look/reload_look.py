@@ -1,4 +1,4 @@
-from shader_look import look
+from animShader.shader_look import look
 
 modules = [look]
 

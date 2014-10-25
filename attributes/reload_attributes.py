@@ -1,14 +1,16 @@
-from attributes import shader_attr
-from attributes import shader_float3_attr
-from attributes import shader_numeric_attr
-from attributes import shader_rgb_attr
-from attributes import shader_string_attr
-from attributes import shader_generic_attr
-from attributes import shader_name_attr
+from animShader.attributes import named_attr
+from animShader.attributes import shape_attr
+from animShader.attributes import float3_attr
+from animShader.attributes import numeric_attr
+from animShader.attributes import rgb_attr
+from animShader.attributes import string_attr
+from animShader.attributes import bump2D_attr
+from animShader.attributes import name_attr
+from animShader.attributes import hardware_rendering_attr
 
-modules = [shader_attr, shader_float3_attr, shader_numeric_attr,
-            shader_rgb_attr, shader_string_attr,shader_generic_attr,
-            shader_name_attr]
+modules = [named_attr, shape_attr,float3_attr, numeric_attr,
+            rgb_attr, string_attr,
+            bump2D_attr,name_attr, hardware_rendering_attr]
 
 
 

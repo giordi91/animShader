@@ -14,5 +14,7 @@ ATTRIBUTE_PATH = ROOT_PATH +'/attributes'
 MATCHER_PATH = ROOT_PATH +'/matcher'
 LOOK_PATH = ROOT_PATH +'/look'
 UITLS_PATH = ROOT_PATH +'/utils'
+RENDERERS_PATH = ROOT_PATH + '/light_setup/renderers'
+LIGHTS_PATH = ROOT_PATH +'/light_setup/lights'
 
 

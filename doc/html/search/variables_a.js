@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['translucence',['translucence',['../classanimshader_1_1shaders_1_1shader__lambert_1_1_lambert.html#a8789b8ea5b72740a60ed68332d854310',1,'animshader::shaders::shader_lambert::Lambert']]],
-  ['transparency',['transparency',['../classanimshader_1_1shaders_1_1shader__lambert_1_1_lambert.html#a3d6be0b8b75a5082c298039605c7dfce',1,'animshader::shaders::shader_lambert::Lambert']]]
+  ['penumbraangle',['penumbraAngle',['../classpython_1_1animshader_1_1light__setup_1_1lights_1_1spot__light_1_1_spot_light.html#acdb9f604a940fe90fdc57e1a96a98a87',1,'python::animshader::light_setup::lights::spot_light::SpotLight']]]
 ];

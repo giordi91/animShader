@@ -1,4 +1,11 @@
 var searchData=
 [
-  ['eccentricity',['eccentricity',['../classanimshader_1_1shaders_1_1shader__blinn_1_1_blinn.html#ac682e8e10697365dd1fb577506a71b40',1,'animshader::shaders::shader_blinn::Blinn']]]
+  ['data',['data',['../classpython_1_1animshader_1_1shader__look_1_1look_1_1_look.html#afc9e1b65d8473d0c7befde7010c3fba7',1,'python::animshader::shader_look::look::Look']]],
+  ['data_5ftype',['data_type',['../classpython_1_1animshader_1_1attributes_1_1named__attr_1_1_named_attr.html#a9e6046ab381b2f2fcd6cfe2d783fc6a1',1,'python::animshader::attributes::named_attr::NamedAttr']]],
+  ['diffuse',['diffuse',['../classpython_1_1animshader_1_1shaders_1_1lambert_1_1_lambert.html#a662603535fcd61c0c84e8ac6ea3dc82b',1,'python::animshader::shaders::lambert::Lambert']]],
+  ['displaylights',['displayLights',['../classpython_1_1animshader_1_1light__setup_1_1renderers_1_1generic__viewport_1_1_generic_viewport.html#a8091cda3b1f0a5ee283ef03bbf6dac5e',1,'python::animshader::light_setup::renderers::generic_viewport::GenericViewport']]],
+  ['displaystyle',['displayStyle',['../classpython_1_1animshader_1_1light__setup_1_1renderers_1_1generic__viewport_1_1_generic_viewport.html#a3d01c87c3891136455b6d699b2590e37',1,'python::animshader::light_setup::renderers::generic_viewport::GenericViewport']]],
+  ['displaytextures',['displayTextures',['../classpython_1_1animshader_1_1light__setup_1_1renderers_1_1generic__viewport_1_1_generic_viewport.html#a3523dbd18b612acba3edba9c42c7c6a5',1,'python::animshader::light_setup::renderers::generic_viewport::GenericViewport']]],
+  ['dmapresolution',['dmapResolution',['../classpython_1_1animshader_1_1light__setup_1_1lights_1_1directional__light_1_1_directional_light.html#aa0967c741efaa86c25f126502bd6a102',1,'python.animshader.light_setup.lights.directional_light.DirectionalLight.dmapResolution()'],['../classpython_1_1animshader_1_1light__setup_1_1lights_1_1point__light_1_1_point_light.html#ae612f7b6c3056b0d3cae9a0af7543197',1,'python.animshader.light_setup.lights.point_light.PointLight.dmapResolution()'],['../classpython_1_1animshader_1_1light__setup_1_1lights_1_1spot__light_1_1_spot_light.html#ab551a743838bcaa1519c8cfe0cba1df9',1,'python.animshader.light_setup.lights.spot_light.SpotLight.dmapResolution()']]],
+  ['dropoff',['dropoff',['../classpython_1_1animshader_1_1light__setup_1_1lights_1_1spot__light_1_1_spot_light.html#aa00ad2c8ab74e2078e38f1c9a3c7c170',1,'python::animshader::light_setup::lights::spot_light::SpotLight']]]
 ];

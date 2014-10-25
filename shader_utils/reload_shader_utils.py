@@ -1,5 +1,5 @@
-from shader_utils import json_utils
-from shader_utils import node_utils
+from animShader.shader_utils import json_utils
+from animShader.shader_utils import node_utils
 
 modules = [json_utils, node_utils]
 

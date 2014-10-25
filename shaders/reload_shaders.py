@@ -1,7 +1,7 @@
-from shaders import shader
-from shaders import shader_lambert
-from shaders import shader_blinn
-modules = [shader, shader_lambert, shader_blinn]
+from animShader.shaders import shader
+from animShader.shaders import lambert
+from animShader.shaders import blinn
+modules = [shader, lambert, blinn]
 
 
 def reload_it():

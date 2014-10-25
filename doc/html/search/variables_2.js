@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['data',['data',['../classanimshader_1_1attributes_1_1shader__generic__attr_1_1_generic__attr.html#a22710b5f20c91cabf6131196709803a8',1,'animshader.attributes.shader_generic_attr.Generic_attr.data()'],['../classanimshader_1_1shader__look_1_1look_1_1_look.html#a9f9827fb84bb37db1469d6a075e3a8a7',1,'animshader.shader_look.look.Look.data()']]],
-  ['data_5ftype',['data_type',['../classanimshader_1_1attributes_1_1shader__attr_1_1_attribute.html#ad8ccf31c43695298ecb75f8ddd265898',1,'animshader::attributes::shader_attr::Attribute']]],
-  ['diffuse',['diffuse',['../classanimshader_1_1shaders_1_1shader__lambert_1_1_lambert.html#a467b27423e87511d9f27c185f5f36793',1,'animshader::shaders::shader_lambert::Lambert']]]
+  ['color',['color',['../classpython_1_1animshader_1_1light__setup_1_1lights_1_1light_1_1_light.html#a1327d75a19a1d056024f2e434346fad2',1,'python.animshader.light_setup.lights.light.Light.color()'],['../classpython_1_1animshader_1_1shaders_1_1lambert_1_1_lambert.html#aa41dbe099aaf6fb1e2e7bc7ca1d343f2',1,'python.animshader.shaders.lambert.Lambert.color()']]],
+  ['coneangle',['coneAngle',['../classpython_1_1animshader_1_1light__setup_1_1lights_1_1spot__light_1_1_spot_light.html#ad92d4cd2a0cbc90d010b9898766bb830',1,'python::animshader::light_setup::lights::spot_light::SpotLight']]],
+  ['create_5fmode',['create_mode',['../classpython_1_1animshader_1_1light__setup_1_1lights_1_1light_1_1_light.html#a3d28bc38614381675239a8e4c93f921d',1,'python.animshader.light_setup.lights.light.Light.create_mode()'],['../classpython_1_1animshader_1_1shaders_1_1shader_1_1_shader.html#ab9d122827218ab668263603f9a4822a5',1,'python.animshader.shaders.shader.Shader.create_mode()']]]
 ];

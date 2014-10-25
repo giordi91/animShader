@@ -5,12 +5,14 @@ import inspect
 
 from maya import cmds
 
-from attributes import shader_name_attr
-from shader_utils import json_utils
-from shader_utils import node_utils
-from attributes import shader_attr
+from animShader.attributes import name_attr
+from animShader.shader_utils import json_utils
+from animShader.shader_utils import node_utils
 
-class Shader(object):
+from storable_class import st_class
+from storable_class import st_attribute
+
+class Shader(st_class.StorableClass):
     """
     This is an abstract implementation of  the
     material class
@@ -20,15 +22,19 @@ class Shader(object):
     ##Constant used for the shader type
     SHADER_TYPE = ABSTRACT_TAG
     ##descriptor for interact with the name of the maya node
-    name = shader_name_attr.Name_attr()
-    def __init__(self, name=None):
+    name = name_attr.NameAttr()
+    def __init__(self, name=None, create_mode = 1):
         """
         The constructor
         @param name: str, the name we want to give to our shader
+        @param create_mode: bool, wheter or not to create the shader at init time
         """
+        st_class.StorableClass.__init__(self)
+
         ##Attribute that holds the internalname of the shader, do not use.
         self.internal_name = name
-
+        ##whether or not to create the shader at init time
+        self.create_mode = create_mode
         self.create()
 
     #TO DO : implement naming based on MObject
@@ -67,6 +73,13 @@ class Shader(object):
         """
         This abstract function is used to create the shader itself
         """
+        if self.create_mode == 0 and self.internal_name != None:
+            if not cmds.objExists(self.internal_name):
+                OpenMaya.MGlobal.displayError("Shader::create: you are trying to init \
+                                the class with a not existing node")
+                return
+            return
+
         if self.SHADER_TYPE == self.ABSTRACT_TAG:
             raise ValueError("Please set the SHADER_TYPE in the \
                 class, cannot be " + self.ABSTRACT_TAG)
@@ -75,61 +88,3 @@ class Shader(object):
             self.name = cmds.rename(res, self.name)
         else:
             self.name = res
-
-    def get_data(self):
-        """
-        This fucntions gather all the attribute values of the shader
-        and returns it as a dict
-        @return dict
-        """
-        #Find the attribute of the shader
-        attrs_to_save = self.get_attrs()
-        #Build the dict
-        to_return = dict((name, getattr(self, name)) for name in attrs_to_save)
-        to_return["type"] = self.__class__.__name__
-        return to_return
-    def save(self, path=None):
-        """
-        This function save all the data of a shader and saves it out
-        @param path : str, where to save the shader
-        """ 
-        to_save = self.get_data()
-        json_utils.save(to_save, path)
-
-    def set_data(self, data):
-        """
-        This function sets all the values in the shader class
-        @param data: dict, the dict previously generate from a
-                     get_data() call
-        """
-        attrs_to_load = self.get_attrs()
-        for name in attrs_to_load:
-            setattr(self, name, data[name])
-
-    def load(self, path=None):
-        """
-        This functions loads all the data in the shader
-        from a json file
-        @param path: str, the location of the file to read, if not
-                     provided a popup dialog browser will show up
-        """
-        #read the data from file
-        data = json_utils.load(path)
-        #set the data in the class
-        self.set_data(data)
-
-    @classmethod
-    def get_attrs(cls):
-        """
-        This function is used to scan the class and find all the
-        shader_attr in the class, returns a dictonary where
-        the key is the name of the attribute and the value
-        is the instance of that attribute
-        @param cls: the class instance to work on
-        """
-
-        results = [a
-                       for b in inspect.getmro(cls)[::-1]
-                       for a, v in vars(b).items()
-                       if issubclass(type(v), shader_attr.Attribute)]
-        return results

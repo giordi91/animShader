@@ -5,10 +5,13 @@ import os
 import imp
 
 from maya import cmds
-from shader_utils import json_utils
-import env_config
+from animShader.shader_utils import json_utils
+from animShader import env_config
 
-class Look(object):
+from storable_class import st_manager
+from storable_class import st_finder
+
+class Look(st_manager.StorableManager):
     """
     @brief shader and assignment manager
 
@@ -37,24 +40,35 @@ class Look(object):
 
     @endcode
     """
-    __foldersToExclude = []
-    __filesToExclude = ["__init__.py", "shader.py", "shader_matcher.py"]
+    __folders_to_eclude = []
+    __files_to_exclude = ["__init__.py", "shader.py", "shader_matcher.py"]
+    ##constant defining the shader path
+    SHADER_PATH = env_config.SHADER_PATH
+    ##constand defining the matcher path
+    MATCHER_PATH = env_config.MATCHER_PATH
 
     def __init__(self):
         """
         This is the constructor
         """
+        st_manager.StorableManager.__init__(self)
 
-        ##Internal data holding all the sublooks
+        ##list holding the internal data (sub looks)
         self.data = []
-        ##all the available shaders
-        self.__shaders = []
-        ##all the available matchers
-        self.__matchers = []
-        ##mapping of the shaders name to its full path
-        self.__shaders_dict = {}
-        ##mapping of the matchers to their full pats
-        self.__matchers_dict = {}
+
+        #setup and config matchers finder
+        ##this is the finder used for the matchers
+        self.matchers_finder = st_finder.Finder()
+        self.matchers_finder.path = self.MATCHER_PATH
+        self.matchers_finder.files_to_exclude = self.__files_to_exclude
+        self.matchers_finder.folders_to_eclude = self.__folders_to_eclude
+
+        #setup and config matchers finder
+        ##this is the finder used for the shaders
+        self.shader_finder = st_finder.Finder()
+        self.shader_finder.path = self.SHADER_PATH
+        self.shader_finder.files_to_exclude = self.__files_to_exclude
+        self.shader_finder.folders_to_eclude = self.__folders_to_eclude
 
         ##forcing the shaders and matchers to populate
         self.available_shaders
@@ -66,13 +80,8 @@ class Look(object):
         Getter property for populating available shaders
         @return list[str]
         """
-        self.__shaders_dict = {}
-        self.__shaders = []
-        self.__check_path(env_config.SHADER_PATH, \
-                            self.__shaders,        \
-                            self.__shaders_dict)
 
-        return self.__shaders
+        return self.shader_finder.available_files
 
     @property
     def available_matchers(self):
@@ -80,42 +89,7 @@ class Look(object):
         Getter property for populating available matchers
         @return list[str]
         """
-
-        self.__matchers_dict = {}
-        self.__matchers = []
-
-        #kick the recursion
-        self.__check_path(env_config.MATCHER_PATH, \
-                            self.__matchers,       \
-                            self.__matchers_dict)
-
-        return self.__matchers
-
-    def __check_path(self, path, accumulation_list, accumulation_dict):
-        """
-        This procedure checks a path for the py files and kicks the recursions
-        @param path: str , the path we want to scan
-        @param accumulation_list: empty list , in this list we
-                                  accumulate the founded moudules
-        @param accumulation_dict: empty dict , the dict we use to map the data
-        """
-
-        res = os.listdir(path)
-        to_return = []
-        for sub_res in res:
-            if sub_res not in self.__foldersToExclude and \
-            os.path.isdir(path + sub_res) == 1:
-                self.__check_path(path  + sub_res + "/", \
-                    accumulation_list, \
-                    accumulation_dict)
-
-
-            if sub_res.find("py") != -1 and sub_res.find(".pyc") == -1 \
-            and sub_res not in self.__filesToExclude:
-                if sub_res.find("reload") == -1:
-                    to_return.append(sub_res)
-                    accumulation_dict[sub_res] = path +"/" + sub_res
-        accumulation_list += to_return
+        return self.matchers_finder.available_files
 
     def add_sublook(self, matchers, shader):
         """
@@ -204,13 +178,20 @@ class Look(object):
         for sub_look in data:
             loaded_matchers = []
             for matcher in sub_look[0]:
-                sub_matcher = self.get_matcher_instance(matcher["type"])[0]
+
+                sub_matcher = self.get_matcher_instance(matcher["type"])
+                if not sub_matcher:
+                    raise ValueError("Look::SetData: Could not create a matcher instance")
                 sub_matcher.set_data(matcher)
                 loaded_matchers.append(sub_matcher)
-            shader = self.get_shader_instance(sub_look[1]["type"])[0]
+            shader = self.get_shader_instance(sub_look[1]["type"])
+            if not shader:
+                    raise ValueError("Look::SetData: Could not create a shader instance")
             shader.set_data(sub_look[1])
 
             self.add_sublook(loaded_matchers, shader)
+
+        self.apply_look()
 
     def load(self, path=None):
         """
@@ -224,49 +205,16 @@ class Look(object):
         #set the data in the class
         self.set_data(data)
 
-    def __get_module_from_string(self, name, dict_mapper):
-        """
-        This procedure makes an istance of a module from its name
-        @param moduleName: str ,the name of the module
-        @return: module instance
-        """
-        module_name = dict_mapper[self.__fix_name(name)]
-        module_name = imp.load_source(self.__fix_name(name, 0), \
-                    module_name)
-        return module_name
-
-    def __fix_name(self, name, add_extension=1):
-        """
-        This procedure converts the given module name in a way that is suitable
-        for the instancing
-        @param moduleName: str ,the name of the module
-        @param addExtension: bool , whether or not to add the ".py" at the end
-        @return: str
-        """
-
-        val = "shader_" +name[0].lower() + name[1:]
-        if add_extension == 1:
-            val += ".py"
-
-        return val
-
-    def __get_instance_from_str(self, name, dict_mapper):
-        """
-        This procedure returns a class instance from the given string
-        @param moduleName: str ,the name of the module
-        """
-
-        module = self.__get_module_from_string(name, dict_mapper)
-        instance = module.get_instance()
-        return instance, module
 
     def get_shader_instance(self, name):
         """
         This function retunrs and instance of a shader
         from its name
         """
+        if not name in self.shader_finder.modules_dict :
+            return
 
-        return self.__get_instance_from_str(name, self.__shaders_dict)
+        return self.shader_finder.modules_dict[name].get_instance()
 
 
     def get_matcher_instance(self, name):
@@ -274,5 +222,9 @@ class Look(object):
         This function retunrs and instance of a matcher
         from its name
         """
+        if not name in self.matchers_finder.modules_dict :
+            return
+            
+        return self.matchers_finder.modules_dict[name].get_instance()
 
-        return self.__get_instance_from_str(name, self.__matchers_dict)
+

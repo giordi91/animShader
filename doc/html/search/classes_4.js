@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['lambert',['Lambert',['../classanimshader_1_1shaders_1_1shader__lambert_1_1_lambert.html',1,'animshader::shaders::shader_lambert']]],
-  ['look',['Look',['../classanimshader_1_1shader__look_1_1look_1_1_look.html',1,'animshader::shader_look::look']]]
+  ['hardwarerenderingattr',['HardwareRenderingAttr',['../classpython_1_1animshader_1_1attributes_1_1hardware__rendering__attr_1_1_hardware_rendering_attr.html',1,'python::animshader::attributes::hardware_rendering_attr']]],
+  ['highqualityrenderer',['HighQualityRenderer',['../classpython_1_1animshader_1_1light__setup_1_1renderers_1_1high__quality__renderer_1_1_high_quality_renderer.html',1,'python::animshader::light_setup::renderers::high_quality_renderer']]]
 ];

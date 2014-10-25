@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['incandescence',['incandescence',['../classanimshader_1_1shaders_1_1shader__lambert_1_1_lambert.html#a4f1c85154a230e4cccf9fecb6cfa7091',1,'animshader::shaders::shader_lambert::Lambert']]],
-  ['internal_5fname',['internal_name',['../classanimshader_1_1shaders_1_1shader_1_1_shader.html#a581f2a1604dbca945ef3b4be9d9a5a67',1,'animshader::shaders::shader::Shader']]]
+  ['hardwarerenderingattr',['HardwareRenderingAttr',['../classpython_1_1animshader_1_1attributes_1_1hardware__rendering__attr_1_1_hardware_rendering_attr.html',1,'python::animshader::attributes::hardware_rendering_attr']]],
+  ['highqualityrenderer',['HighQualityRenderer',['../classpython_1_1animshader_1_1light__setup_1_1renderers_1_1high__quality__renderer_1_1_high_quality_renderer.html',1,'python::animshader::light_setup::renderers::high_quality_renderer']]]
 ];
